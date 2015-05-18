@@ -1,0 +1,66 @@
+/*
+* Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License version 2 as
+* published by the Free Software Foundation.
+*/
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/board/am335x-bbw-bbb-base.h>
+#include <dt-bindings/pinctrl/am33xx.h>
+
+/ {
+	compatible = "ti,beaglebone", "ti,beaglebone-black";
+
+	/* identification */
+	part-number = "BB-BONE-eMMC1-01";
+	version = "00A0";
+
+	/* state the resources this cape uses */
+	exclusive-use =
+		/* the pin header uses */
+		"P8.21",	/* mmc1: mmc1_clk */
+		"P8.20",	/* mmc1: mmc1_cmd */
+		"P8.25",	/* mmc1: mmc1_dat0 */
+		"P8.24",	/* mmc1: mmc1_dat1 */
+		"P8.5",		/* mmc1: mmc1_dat2 */
+		"P8.6",		/* mmc1: mmc1_dat3 */
+		"P8.23",	/* mmc1: mmc1_dat4 */
+		"P8.22",	/* mmc1: mmc1_dat5 */
+		"P8.3",		/* mmc1: mmc1_dat6 */
+		"P8.4",		/* mmc1: mmc1_dat7 */
+		/* the hardware IP uses */
+		"mmc1";
+
+	fragment@0 {
+		target = <&am33xx_pinmux>;
+		__overlay__ {
+			bb_emmc_pins: pinmux_bb_emmc_pins {
+				pinctrl-single,pins = <
+					BONE_P8_21 (PIN_INPUT_PULLUP | MUX_MODE2) /* gpmc_csn1.mmc1_clk */
+					BONE_P8_20 (PIN_INPUT_PULLUP | MUX_MODE2) /* gpmc_csn2.mmc1_cmd */
+					BONE_P8_25 (PIN_INPUT_PULLUP | MUX_MODE1) /* gpmc_ad0.mmc1_dat0 */
+					BONE_P8_24 (PIN_INPUT_PULLUP | MUX_MODE1) /* gpmc_ad1.mmc1_dat1 */
+					BONE_P8_05 (PIN_INPUT_PULLUP | MUX_MODE1) /* gpmc_ad2.mmc1_dat2 */
+					BONE_P8_06 (PIN_INPUT_PULLUP | MUX_MODE1) /* gpmc_ad3.mmc1_dat3 */
+					BONE_P8_23 (PIN_INPUT_PULLUP | MUX_MODE1) /* gpmc_ad4.mmc1_dat4 */
+					BONE_P8_22 (PIN_INPUT_PULLUP | MUX_MODE1) /* gpmc_ad5.mmc1_dat5 */
+					BONE_P8_03 (PIN_INPUT_PULLUP | MUX_MODE1) /* gpmc_ad6.mmc1_dat6 */
+					BONE_P8_04 (PIN_INPUT_PULLUP | MUX_MODE1) /* gpmc_ad7.mmc1_dat7 */
+				>;
+			};
+		};
+	};
+	fragment@1 {
+		target = <&mmc2>;
+		__overlay__ {
+			vmmc-supply = <&vmmcsd_fixed>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&bb_emmc_pins>;
+			bus-width = <8>;
+			status = "okay";
+		};
+	};
+};
