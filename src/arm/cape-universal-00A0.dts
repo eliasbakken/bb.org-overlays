@@ -1241,7 +1241,7 @@
     };
     
     fragment@2 {
-        target = <&ocp>;
+	target-path="/";
         __overlay__ {
 
             cape-universal {
