@@ -1455,12 +1455,12 @@
                     input;
                     dir-changeable;
                 };
-                P9_41 {
-                    gpio-name = "P9_41";
-                    gpio = <&gpio0 20 0>;
-                    input;
-                    dir-changeable;
-                };
+//                P9_41 {
+//                    gpio-name = "P9_41";
+//                    gpio = <&gpio0 20 0>;
+//                    input;
+//                    dir-changeable;
+//                };
                 P9_91 {
                     gpio-name = "P9_91";
                     gpio = <&gpio3 20 0>;
