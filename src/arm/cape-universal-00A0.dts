@@ -772,8 +772,10 @@
     /************************/
 
     fragment@1 {
-        target = <&ocp>;
+	target-path="/";
         __overlay__ {
+
+		cape-universal {
 
             /************************/
             /* P8 Header            */
@@ -1239,6 +1241,7 @@
             };
         };
     };
+	};
     
     fragment@2 {
 	target-path="/";
