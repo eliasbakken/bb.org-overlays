@@ -772,14 +772,12 @@
     /************************/
 
     fragment@1 {
-	target-path="/";
+        target = <&ocp>;
         __overlay__ {
 
             /************************/
             /* P8 Header            */
             /************************/
-
-            cape-universal-pinmux {
 
             P8_07_pinmux {
                 compatible = "bone-pinmux-helper";
@@ -1241,10 +1239,9 @@
             };
         };
     };
-    };
     
     fragment@2 {
-	target-path="/";
+        target = <&ocp>;
         __overlay__ {
 
             cape-universal {
